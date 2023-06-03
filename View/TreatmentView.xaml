@@ -1,0 +1,57 @@
+﻿<Page x:Class="TraumaSoftware.View.TreatmentView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TraumaSoftware.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="470" d:DesignWidth="1000"
+      Title="TreatmentView" IsVisibleChanged="Page_IsVisibleChanged">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Margin="10 0 0 10" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Border Name="SearchBar" Width="250" Style="{StaticResource BorderBox}">
+                    <Grid>
+                        <TextBlock Name="SearchWatermark" Text="Find them..." Width="250" MouseDown="SearchWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                        <TextBox Name="SearchBox" MaxLength="40" TextChanged="SearchBox_TextChanged" Style="{StaticResource TextBox}"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+            <StackPanel Margin="0 0 0 0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Image Name="RefreshButton" Height="24" Width="24" Margin="15 0 15 0" Cursor="Hand" VerticalAlignment="Bottom"
+                       Source="/view/resources/refresh.png" MouseDown="RefreshButton_MouseDown">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value=".65"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <Button Name="CreateButton" Content="CREATE" Click="CreateButton_Click" Style="{StaticResource ControlButton}"/>
+                <Button Name="DeleteButton" Content="DELETE" Click="DeleteButton_Click" Style="{StaticResource ControlButton}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid Name="TreatmentDataGrid" Style="{StaticResource CustomDataGrid}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="TREATER ID" Width="*" Binding="{Binding Cabinet.Treater.Id}"/>
+                    <DataGridTextColumn Header="CABINET" Width="*" Binding="{Binding Cabinet.Number}"/>
+                    <DataGridTextColumn Header="CUSTOMER ID" Width="*" Binding="{Binding Medcard.Customer.Id}"/>
+                    <DataGridTextColumn Header="MEDCARD" Width="*" Binding="{Binding Medcard.Number}"/>
+                    <DataGridTextColumn Header="DATE" Width="*" Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="TIME" Width="*" Binding="{Binding Time}"/>
+                    <DataGridTextColumn Header="PRICE" Width="*" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="COMMENT" Width="*" Binding="{Binding Comment}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

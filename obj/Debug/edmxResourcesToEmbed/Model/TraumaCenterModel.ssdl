@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище TraumaCenterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Benefit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Discount" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cabinet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Treater_Id" Type="int" Nullable="false" />
+    <Property Name="Number" Type="char" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="20" />
+    <Property Name="Birth" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Phone" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Insurance" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="Service" Type="bit" Nullable="false" />
+    <Property Name="Department_Id" Type="int" />
+    <Property Name="District" Type="nvarchar" MaxLength="20" />
+    <Property Name="Location" Type="nvarchar" MaxLength="20" />
+    <Property Name="Street" Type="nvarchar" MaxLength="20" />
+    <Property Name="Apartment" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Medcard">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_Id" Type="int" Nullable="false" />
+    <Property Name="Number" Type="char" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Treatment_Id" Type="int" Nullable="false" />
+    <Property Name="Benefit_Id" Type="int" />
+    <Property Name="Sum" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Specification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Treater">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="20" />
+    <Property Name="Birth" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Phone" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Picture" Type="varchar(max)" Nullable="false" />
+    <Property Name="Specification_Id" Type="int" Nullable="false" />
+    <Property Name="Education" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Career" Type="char" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Treatment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cabinet_Id" Type="int" Nullable="false" />
+    <Property Name="Medcard_Id" Type="int" Nullable="false" />
+    <Property Name="Date" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Time" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Cabinet_Treater">
+    <End Role="Treater" Type="Self.Treater" Multiplicity="1" />
+    <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Treater">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cabinet">
+        <PropertyRef Name="Treater_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Department_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medcard_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Medcard" Type="Self.Medcard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Medcard">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Benefit">
+    <End Role="Benefit" Type="Self.Benefit" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Benefit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="Benefit_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Treatment">
+    <End Role="Treatment" Type="Self.Treatment" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Treatment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="Treatment_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Treater_Specification">
+    <End Role="Specification" Type="Self.Specification" Multiplicity="1" />
+    <End Role="Treater" Type="Self.Treater" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specification">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Treater">
+        <PropertyRef Name="Specification_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Treatment_Cabinet">
+    <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="1" />
+    <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cabinet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Treatment">
+        <PropertyRef Name="Cabinet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Treatment_Medcard">
+    <End Role="Medcard" Type="Self.Medcard" Multiplicity="1" />
+    <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medcard">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Treatment">
+        <PropertyRef Name="Medcard_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище TraumaCenterModelContainer">
+    <EntitySet Name="Benefit" EntityType="Self.Benefit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cabinet" EntityType="Self.Cabinet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medcard" EntityType="Self.Medcard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Specification" EntityType="Self.Specification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Treater" EntityType="Self.Treater" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Treatment" EntityType="Self.Treatment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cabinet_Treater" Association="Self.FK_Cabinet_Treater">
+      <End Role="Treater" EntitySet="Treater" />
+      <End Role="Cabinet" EntitySet="Cabinet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Department" Association="Self.FK_Customer_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medcard_Customer" Association="Self.FK_Medcard_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Medcard" EntitySet="Medcard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Benefit" Association="Self.FK_Payment_Benefit">
+      <End Role="Benefit" EntitySet="Benefit" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Treatment" Association="Self.FK_Payment_Treatment">
+      <End Role="Treatment" EntitySet="Treatment" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Treater_Specification" Association="Self.FK_Treater_Specification">
+      <End Role="Specification" EntitySet="Specification" />
+      <End Role="Treater" EntitySet="Treater" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Treatment_Cabinet" Association="Self.FK_Treatment_Cabinet">
+      <End Role="Cabinet" EntitySet="Cabinet" />
+      <End Role="Treatment" EntitySet="Treatment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Treatment_Medcard" Association="Self.FK_Treatment_Medcard">
+      <End Role="Medcard" EntitySet="Medcard" />
+      <End Role="Treatment" EntitySet="Treatment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

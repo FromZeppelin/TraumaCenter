@@ -1,0 +1,110 @@
+﻿<Window x:Class="TraumaSoftware.View.VerificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TraumaSoftware.View"
+        mc:Ignorable="d"
+        Title="VerificationWindow" Height="470" Width="750" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270"/>
+            <ColumnDefinition Width="480"/>
+        </Grid.ColumnDefinitions>
+        <Border Name="JumpArea" Grid.Column="0" CornerRadius="15 0 0 15">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                    <GradientStop Color="#F9232F" Offset="0"/>
+                    <GradientStop Color="#880022" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Canvas>
+                    <Polygon Points="0, 20 230, 140 0, 270">
+                        <Polygon.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                                <GradientStop Color="#42AFC3" Offset="0"/>
+                                <GradientStop Color="#1515" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Polygon.Fill>
+                    </Polygon>
+                    <Polygon Points="100, 400 200, 370 180, 470">
+                        <Polygon.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                                <GradientStop Color="#1515" Offset="0"/>
+                                <GradientStop Color="#42AFC3" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Polygon.Fill>
+                    </Polygon>
+                </Canvas>
+                <StackPanel Margin="0 150 0 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <TextBlock Text="Get Started" Margin="0 0 20 20" Style="{StaticResource Title}"/>
+                    <TextBlock Margin="0 20 0 0" FontSize="17" Opacity=".85" Style="{StaticResource Title}">
+                        Please, send your user indicator <LineBreak/> And enter your user password too
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Name="ContentArea" Grid.Column="1" Background="#0C0002">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="280"/>
+                    <RowDefinition Height="54"/>
+                </Grid.RowDefinitions>
+                <Grid Name="TaskBar" Grid.Row="0" MouseDown="TaskBar_MouseDown" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Image Name="CloseButton" Margin="0 0 5 0" Height="20" Source="/View/Resources/close.png" Cursor="Hand" MouseDown="CloseButton_MouseDown">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Opacity" Value=".75"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
+                </Grid>
+                <Grid Name="EmblemSpace" Grid.Row="1" MouseDown="EmblemSpace_MouseDown" Background="Transparent">
+                    <Image Source="/View/Resources/emblem.png" Width="275" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image.Effect>
+                            <DropShadowEffect BlurRadius="2.5" Color="#FF0042" ShadowDepth="5" Opacity=".5"/>
+                        </Image.Effect>
+                    </Image>
+                </Grid>
+                <StackPanel Grid.Row="2" Margin="0 0 0 10" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <StackPanel Margin="0 0 0 5" Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="INDICATOR" Style="{StaticResource BorderTag}"/>
+                            <Border Name="IndicatorBorder" Width="200" Style="{StaticResource BorderBox}">
+                                <Grid>
+                                    <TextBlock Name="IndicatorWatermark" Text="Assistant" Width="200" MouseDown="IndicatorWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                                    <TextBox Name="IndicatorBox" MaxLength="20" TextChanged="IndicatorBox_TextChanged" Style="{StaticResource TextBox}"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Margin="0 10 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="PASSWORD" Style="{StaticResource BorderTag}"/>
+                            <Border Name="PasswordBorder" Width="200" Style="{StaticResource BorderBox}">
+                                <Grid>
+                                    <TextBlock Name="PasswordWatermark" Text="User Password" Width="200" MouseDown="PasswordWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                                    <PasswordBox Name="PasswordBox" MaxLength="20" PasswordChanged="PasswordBox_PasswordChanged" Style="{StaticResource PasswordBox}"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock Name="TimeoutWatermark" Text="" HorizontalAlignment="Right" Foreground="#FF0042" Opacity="1" Style="{StaticResource TextWatermark}"/>
+                    <Button Name="EnterButton" Content="ENTER" Margin="0 30 0 0" Click="EnterButton_Click" Style="{StaticResource EnterButton}">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="25" Color="#FF0042" ShadowDepth="0" Opacity=".5"/>
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

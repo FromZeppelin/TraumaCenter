@@ -1,0 +1,118 @@
+﻿<Window x:Class="TraumaSoftware.View.LauncherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TraumaSoftware.View"
+        xmlns:vm="clr-namespace:TraumaSoftware.ViewModel"
+        mc:Ignorable="d"
+        Title="LauncherWindow" Height="600" Width="1200" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <Grid Background="#0c0002">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="Menu" Grid.Column="0" HorizontalAlignment="Left" Background="Transparent" MouseDown="Menu_MouseDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <Grid.Style>
+                <Style TargetType="{x:Type Grid}">
+                    <Setter Property="Width" Value="200"/>
+                </Style>
+            </Grid.Style>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20 0 0 0"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <Image Height="50" Width="50" Margin="0 0 10 0"
+                       Source="/View/Resources/mini-emblem.png"/>
+                <TextBlock FontFamily="/View/Fonts/#Blender Pro Book" FontSize="24" Foreground="#D3D3D3">Trauma<LineBreak/>Software</TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+                <Button Name="TreatersTab" Template="{StaticResource MenuButton}"
+                        Content="TREATERS" Command="{Binding OpenTreaterView}">
+                    <Button.Resources>
+                        <ImageSource x:Key="ButtonIcon">/view/resources/employee.png</ImageSource>
+                    </Button.Resources>
+                </Button>
+                <Button Name="CustomersTab" Template="{StaticResource MenuButton}"
+                        Content="CUSTOMERS" Command="{Binding OpenCustomerView}">
+                    <Button.Resources>
+                        <ImageSource x:Key="ButtonIcon">/view/resources/folder.png</ImageSource>
+                    </Button.Resources>
+                </Button>
+                <Button Name="TimeTableTab" Template="{StaticResource MenuButton}"
+                        Content="TIMETABLE" Command="{Binding OpenTreatmentView}">
+                    <Button.Resources>
+                        <ImageSource x:Key="ButtonIcon">/view/resources/calendar.png</ImageSource>
+                    </Button.Resources>
+                </Button>
+                <Button Name="SpecificationTab" Template="{StaticResource MenuButton}"
+                        Content="SPECIALTIES" Command="{Binding OpenSpecificationView}">
+                    <Button.Resources>
+                        <ImageSource x:Key="ButtonIcon">/view/resources/star.png</ImageSource>
+                    </Button.Resources>
+                </Button>
+                <Button Name="DepartmentTab" Template="{StaticResource MenuButton}"
+                        Content="DEPARTMENTS" Command="{Binding OpenDepartmentView}">
+                    <Button.Resources>
+                        <ImageSource x:Key="ButtonIcon">/view/resources/department.png</ImageSource>
+                    </Button.Resources>
+                </Button>
+                <Button Name="BenefitsTab" Template="{StaticResource MenuButton}"
+                        Content="BENEFITS" Command="{Binding OpenBenefitView}">
+                    <Button.Resources>
+                        <ImageSource x:Key="ButtonIcon">/view/resources/coin.png</ImageSource>
+                    </Button.Resources>
+                </Button>
+                <Button Name="PaymentTab" Template="{StaticResource MenuButton}"
+                        Content="PAYMENT" Command="{Binding OpenPaymentView}">
+                    <Button.Resources>
+                        <ImageSource x:Key="ButtonIcon">/view/resources/credit-card.png</ImageSource>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Image Name="CollapseButton" Height="30" Width="30" Margin="20 0 0 10" Cursor="Hand" 
+                       Source="/view/resources/collapse.png" MouseDown="CollapseButton_MouseDown">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value=".65"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </StackPanel>
+        </Grid>
+        <Grid Name="ContentArea" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Name="TopBar" Grid.Row="0" Background="Transparent" MouseDown="TopBar_MouseDown">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Image Name="CloseButton" Height="25" Source="/View/Resources/close.png" Cursor="Hand" MouseDown="CloseButton_MouseDown">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Opacity" Value=".75"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </StackPanel>
+            </Grid>
+            <Frame Name="Container" Content="{Binding CurrentView}" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Grid>
+</Window>

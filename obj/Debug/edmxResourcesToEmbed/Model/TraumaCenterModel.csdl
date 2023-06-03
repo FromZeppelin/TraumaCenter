@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TraumaCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Benefit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Discount" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_Benefit" FromRole="Benefit" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Cabinet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Treater_Id" Type="Int32" Nullable="false" />
+    <Property Name="Number" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Treater" Relationship="Self.FK_Cabinet_Treater" FromRole="Cabinet" ToRole="Treater" />
+    <NavigationProperty Name="Treatment" Relationship="Self.FK_Treatment_Cabinet" FromRole="Cabinet" ToRole="Treatment" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Birth" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Insurance" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Service" Type="Boolean" Nullable="false" />
+    <Property Name="Department_Id" Type="Int32" />
+    <Property Name="District" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Street" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Apartment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_Customer_Department" FromRole="Customer" ToRole="Department" />
+    <NavigationProperty Name="Medcard" Relationship="Self.FK_Medcard_Customer" FromRole="Customer" ToRole="Medcard" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_Department" FromRole="Department" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Medcard">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer_Id" Type="Int32" Nullable="false" />
+    <Property Name="Number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Medcard_Customer" FromRole="Medcard" ToRole="Customer" />
+    <NavigationProperty Name="Treatment" Relationship="Self.FK_Treatment_Medcard" FromRole="Medcard" ToRole="Treatment" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Treatment_Id" Type="Int32" Nullable="false" />
+    <Property Name="Benefit_Id" Type="Int32" />
+    <Property Name="Sum" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Benefit" Relationship="Self.FK_Payment_Benefit" FromRole="Payment" ToRole="Benefit" />
+    <NavigationProperty Name="Treatment" Relationship="Self.FK_Payment_Treatment" FromRole="Payment" ToRole="Treatment" />
+  </EntityType>
+  <EntityType Name="Specification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Treater" Relationship="Self.FK_Treater_Specification" FromRole="Specification" ToRole="Treater" />
+  </EntityType>
+  <EntityType Name="Treater">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Birth" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Specification_Id" Type="Int32" Nullable="false" />
+    <Property Name="Education" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Career" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Cabinet" Relationship="Self.FK_Cabinet_Treater" FromRole="Treater" ToRole="Cabinet" />
+    <NavigationProperty Name="Specification" Relationship="Self.FK_Treater_Specification" FromRole="Treater" ToRole="Specification" />
+  </EntityType>
+  <EntityType Name="Treatment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cabinet_Id" Type="Int32" Nullable="false" />
+    <Property Name="Medcard_Id" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Time" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cabinet" Relationship="Self.FK_Treatment_Cabinet" FromRole="Treatment" ToRole="Cabinet" />
+    <NavigationProperty Name="Medcard" Relationship="Self.FK_Treatment_Medcard" FromRole="Treatment" ToRole="Medcard" />
+    <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_Treatment" FromRole="Treatment" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Payment_Benefit">
+    <End Role="Benefit" Type="Self.Benefit" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Benefit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="Benefit_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cabinet_Treater">
+    <End Role="Treater" Type="Self.Treater" Multiplicity="1" />
+    <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Treater">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cabinet">
+        <PropertyRef Name="Treater_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Treatment_Cabinet">
+    <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="1" />
+    <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cabinet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Treatment">
+        <PropertyRef Name="Cabinet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Department_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medcard_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Medcard" Type="Self.Medcard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Medcard">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Treatment_Medcard">
+    <End Role="Medcard" Type="Self.Medcard" Multiplicity="1" />
+    <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medcard">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Treatment">
+        <PropertyRef Name="Medcard_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Treatment">
+    <End Role="Treatment" Type="Self.Treatment" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Treatment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="Treatment_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Treater_Specification">
+    <End Role="Specification" Type="Self.Specification" Multiplicity="1" />
+    <End Role="Treater" Type="Self.Treater" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specification">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Treater">
+        <PropertyRef Name="Specification_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TraumaCenterEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Benefit" EntityType="Self.Benefit" />
+    <EntitySet Name="Cabinet" EntityType="Self.Cabinet" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" />
+    <EntitySet Name="Department" EntityType="Self.Department" />
+    <EntitySet Name="Medcard" EntityType="Self.Medcard" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" />
+    <EntitySet Name="Specification" EntityType="Self.Specification" />
+    <EntitySet Name="Treater" EntityType="Self.Treater" />
+    <EntitySet Name="Treatment" EntityType="Self.Treatment" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_Payment_Benefit" Association="Self.FK_Payment_Benefit">
+      <End Role="Benefit" EntitySet="Benefit" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cabinet_Treater" Association="Self.FK_Cabinet_Treater">
+      <End Role="Treater" EntitySet="Treater" />
+      <End Role="Cabinet" EntitySet="Cabinet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Treatment_Cabinet" Association="Self.FK_Treatment_Cabinet">
+      <End Role="Cabinet" EntitySet="Cabinet" />
+      <End Role="Treatment" EntitySet="Treatment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Department" Association="Self.FK_Customer_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medcard_Customer" Association="Self.FK_Medcard_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Medcard" EntitySet="Medcard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Treatment_Medcard" Association="Self.FK_Treatment_Medcard">
+      <End Role="Medcard" EntitySet="Medcard" />
+      <End Role="Treatment" EntitySet="Treatment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Treatment" Association="Self.FK_Payment_Treatment">
+      <End Role="Treatment" EntitySet="Treatment" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Treater_Specification" Association="Self.FK_Treater_Specification">
+      <End Role="Specification" EntitySet="Specification" />
+      <End Role="Treater" EntitySet="Treater" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,145 @@
+﻿<Page x:Class="TraumaSoftware.View.EditCustomerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TraumaSoftware.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="470" d:DesignWidth="1000"
+      Title="EditCustomerView">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <StackPanel Margin="180 0 0 0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <StackPanel Margin="0 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="NAME" Style="{StaticResource BorderTag}"/>
+                    <Border Name="NameBorder" Width="150" Style="{StaticResource BorderBox}">
+                        <Grid>
+                            <TextBlock Name="NameWatermark" Text="Jonathan" Width="150" MouseDown="NameWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="NameBox" MaxLength="20" Text="{Binding Name}" TextChanged="NameBox_TextChanged" PreviewTextInput="NameBox_PreviewTextInput" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="MIDNAME" Style="{StaticResource BorderTag}"/>
+                    <Border Name="MidnameBorder" Width="150" Style="{StaticResource BorderBox}">
+                        <Grid>
+                            <TextBlock Name="MidnameWatermark" Text="Jordan" Width="150" MouseDown="MidnameWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="MidnameBox" MaxLength="20" Text="{Binding Patronymic}" TextChanged="MidnameBox_TextChanged" PreviewTextInput="MidnameBox_PreviewTextInput" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="SURNAME" Style="{StaticResource BorderTag}"/>
+                    <Border Name="SurnameBorder" Width="150" Style="{StaticResource BorderBox}">
+                        <Grid>
+                            <TextBlock Name="SurnameWatermark" Text="Doe" Width="150" MouseDown="SurnameWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="SurnameBox" MaxLength="20" Text="{Binding Surname}" TextChanged="SurnameBox_TextChanged" PreviewTextInput="SurnameBox_PreviewTextInput" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel Margin="180 0 0 0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="BIRTH" Style="{StaticResource BorderTag}"/>
+                    <Border Name="BirthBorder" Width="100" Style="{StaticResource BorderBox}">
+                        <Grid>
+                            <TextBlock Name="BirthWatermark" Text="11/16/1988" Width="100" MouseDown="BirthWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="BirthBox" MaxLength="10" Text="{Binding Birth}" TextChanged="BirthBox_TextChanged" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="PHONE" Style="{StaticResource BorderTag}"/>
+                    <Border Name="PhoneBorder" Width="115" Style="{StaticResource BorderBox}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="CodeWatermark" Text="+1 | " Grid.Column="0" Width="25" Opacity="1" Style="{StaticResource TextWatermark}"/>
+                            <TextBlock Name="PhoneWatermark" Text="880553535" Grid.Column="1" Width="90" MouseDown="PhoneWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="PhoneBox" Grid.Column="1" MaxLength="10" Text="{Binding Phone}" TextChanged="PhoneBox_TextChanged" PreviewTextInput="PhoneBox_PreviewTextInput" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="INSURANCE ID" Style="{StaticResource BorderTag}"/>
+                    <Border Name="InsuranceBorder" Width="190" Style="{StaticResource BorderBox}">
+                        <Grid Cursor="">
+                            <TextBlock Name="InsuranceWatermark" Text="00000000000000000001" Width="190" MouseDown="InsuranceWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="InsuranceBox" MaxLength="20" Text="{Binding Insurance}" TextChanged="InsuranceBox_TextChanged" PreviewTextInput="InsuranceBox_PreviewTextInput" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="SERVICE" Style="{StaticResource BorderTag}"/>
+                    <Border Name="ServicemanBorder" Width="80" Style="{StaticResource BorderBox}">
+                        <Grid Cursor="">
+                            <TextBlock Name="ServicemanWatermark" Text="0/1" Width="80" MouseDown="ServicemanWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="ServicemanBox" MaxLength="20" Text="{Binding Serviceman}" TextChanged="ServicemanBox_TextChanged" PreviewTextInput="ServicemanBox_PreviewTextInput" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="DEPARTMENT" Style="{StaticResource BorderTag}"/>
+                    <ComboBox Name="DepartmentComboBox" SelectedItem="{Binding Department}" DisplayMemberPath="Type" SelectedIndex="0" Height="30" Width="140" Style="{StaticResource ComboBoxFlatStyle}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3">
+            <StackPanel Margin="250 0 0 0" Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="DISTRICT" Style="{StaticResource BorderTag}"/>
+                    <Border Name="DistrictBorder" Width="150" Style="{StaticResource BorderBox}">
+                        <Grid>
+                            <TextBlock Name="DistrictWatermark" Text="California" Width="150" MouseDown="DistrictWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="DistrictBox" MaxLength="20" Text="{Binding District}" TextChanged="DistrictBox_TextChanged" PreviewTextInput="DistrictBox_PreviewTextInput" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="LOCATION" Style="{StaticResource BorderTag}"/>
+                    <Border Name="LocationBorder" Width="150" Style="{StaticResource BorderBox}">
+                        <Grid>
+                            <TextBlock Name="LocationWatermark" Text="Los Angeles" Width="150" MouseDown="LocationWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="LocationBox" MaxLength="20" Text="{Binding Location}" TextChanged="LocationBox_TextChanged" PreviewTextInput="LocationBox_PreviewTextInput" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="STREET" Style="{StaticResource BorderTag}"/>
+                    <Border Name="StreetBorder" Width="120" Style="{StaticResource BorderBox}">
+                        <Grid>
+                            <TextBlock Name="StreetWatermark" Text="Roosvelt St." Width="120" MouseDown="StreetWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="StreetBox" MaxLength="20" Text="{Binding Street}" TextChanged="StreetBox_TextChanged" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="APARTMENT" Style="{StaticResource BorderTag}"/>
+                    <Border Name="ApartmentBorder" Width="105" Style="{StaticResource BorderBox}">
+                        <Grid>
+                            <TextBlock Name="ApartmentWatermark" Text="25-01" Width="105" MouseDown="ApartmentWatermark_MouseDown" Style="{StaticResource TextWatermark}"/>
+                            <TextBox Name="ApartmentBox" MaxLength="20" Text="{Binding Apartment}" TextChanged="ApartmentBox_TextChanged" Style="{StaticResource TextBox}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="4">
+            <StackPanel Margin="0 40 170 0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Name="CancelButton" Content="CANCEL" Click="CancelButton_Click" Style="{StaticResource ControlButton}"/>
+                <Button Name="AcceptButton" Content="ACCEPT" Click="AcceptButton_Click" Style="{StaticResource ControlButton}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
